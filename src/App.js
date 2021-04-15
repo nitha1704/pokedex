@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-function App() {
+// CSS
+import "./css/style.css";
+import "./css/responsive.css";
+
+// Plugins
+import "./plugins/bootstrap/bootstrap.min.css";
+
+// Pages
+import Home from './pages/Home'
+import ErrorPage from './pages/ErrorPage'
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="pokemon-container">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="*" component={ErrorPage} />
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default App

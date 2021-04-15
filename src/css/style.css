@@ -1,0 +1,56 @@
+@import url("./fonts/font-lists.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: black !important;
+  color: #fff !important;
+  font-family: "Cardo-Regular.ttf" !important;
+}
+img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+.img-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pokemon-container {
+  max-width: 1440px;
+  width: 95vw;
+  margin: 0 auto;
+  position: relative;
+}
+.inner {
+  max-width: 1440px;
+  width: 95vw;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ul-cleargap {
+  display: flex;
+  list-style: none;
+  margin: 0 !important;
+}
+
+a a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+.capitalize {
+  text-transform: uppercase !important;
+}
+
+.app {
+  background: url("../images/pokemon_bg.jpg");
+  background-position: center;
+  min-height: 100vh;
+  padding: 30px 0;
+}
