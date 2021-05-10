@@ -183,12 +183,12 @@ const PokemonInfo = () => {
                   <img
                     src={pokemonFrontCircleBackground}
                     className="pokemon-front-circle-background"
-                    alt="front-circle-background"
+                    alt=""
                   />
                   <img
                     src={pokemonBackCircleBackground}
                     className="pokemon-back-circle-background"
-                    alt="back-circle-background"
+                    alt=""
                   />
                   <img
                     src={isImgLoading ? loadingIMG2 : pokemonImage}
