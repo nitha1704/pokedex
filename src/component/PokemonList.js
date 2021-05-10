@@ -5,13 +5,12 @@ import styled from 'styled-components';
 import {PokedexContext} from '../context/PokedexContext';
 // Component
 import PokemonCard from './PokemonCard';
-import Pagination from './Pagination';
 // Loading Image
-import loadingIMG from "../images/loading-img/loading1.gif";
+import loadingIMG from "../images/loading-img/loading1-small250x250.gif";
 
 const PokemonList = () => {
 
-  const {loading, pokemon, pokemonFilter} = useContext(PokedexContext);
+  const {loading, pokemonFilter} = useContext(PokedexContext);
 
   if(loading) {
       return <WrapLoadingImage>
@@ -26,11 +25,13 @@ const PokemonList = () => {
 };
 
 const WrapLoadingImage = styled.div`
-    img {
-        display:block;
-        margin:0 auto;
-    }
-`
+  position: relative;
+  top: 5vw;
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+`;
 const WrapPokemonList = styled.div`
     text-align: center;
 `

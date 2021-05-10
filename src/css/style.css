@@ -6,9 +6,11 @@
   box-sizing: border-box;
 }
 body {
-  background: black !important;
+  background: url("../images/pokemon_bg.jpg");
+  background-position: center !important;
   color: #fff !important;
   font-family: "Cardo-Regular.ttf" !important;
+  overflow-x: hidden;
 }
 img {
   width: auto;
@@ -22,7 +24,7 @@ img {
 }
 .pokemon-container {
   max-width: 1440px;
-  width: 95vw;
+  width: 92vw;
   margin: 0 auto;
   position: relative;
 }
@@ -41,6 +43,7 @@ img {
 
 a a:hover,
 a:focus {
+  color:initial;
   text-decoration: none;
 }
 
@@ -48,9 +51,23 @@ a:focus {
   text-transform: uppercase !important;
 }
 
+.thicker {
+  text-shadow: 0 1px 0 black, 0 0 1px rgb(0,0,0),0 0 2px rgb(0,0,0),0 0 3px rgb(0,0,0),0 0 4px rgb(0,0,0);
+}
+
 .app {
   background: url("../images/pokemon_bg.jpg");
   background-position: center;
   min-height: 100vh;
-  padding: 30px 0;
+}
+
+.pokemon-header-title {
+    padding: 10px 0;
+    text-align: center;
+    font-family: "Pocket-Monk.otf";
+    color: wheat;
+    font-size: 60px;
+    text-shadow: 0 1px 0 black, 0 0 1px rgba(0, 0, 0, 0.6),
+      0 0 2px rgba(0, 0, 0, 0.7), 0 0 3px rgba(0, 0, 0, 0.8),
+      0 0 4px rgba(0, 0, 0, 0.9);
 }

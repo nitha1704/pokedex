@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link as AnchorLink, animateScroll as scroll } from "react-scroll";
 import { PokedexContext } from "../context/PokedexContext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "../../node_modules/react-lazy-load-image-component/src/effects/blur.css";
@@ -7,16 +9,42 @@ import "../../node_modules/react-lazy-load-image-component/src/effects/blur.css"
 // Background
 import PokemonCardBackground from "../images/pokemon_card_bg.png";
 // Loading Image
-import loadingIMG from "../images/loading-img/loading2-small.gif";
+import loadingIMG from "../images/loading-img/loading2.gif";
+// Go Top Button
+import topButton from "../images/kisspng-button-download-ppt-top-button-5aa126b3bc8435.2277196315205106437722.png";
 
 const PokemonCard = ({ pokemonFilter }) => {
-  const { pokemonEndPoint, setPokemonEndPoint } = useContext(PokedexContext);
-  const [pokemonChildrenLength, setWrapPokemonChildrenLength] = useState(0);
+
+  const {
+    pokemonEndPoint,
+    setPokemonEndPoint,
+    typesColor,
+    scrollTopPosition,
+    setScrollTopPosition,
+  } = useContext(PokedexContext);
+  const [pokemonChildrenLength, setPokemonChildrenLength] = useState(0);
   const handleFirstRender = useRef(true);
   const wrapPokemonItem = useRef(null);
 
   const handleLoadingMore = () => {
     setPokemonEndPoint(pokemonEndPoint + 12);
+    const wrapPokeCard = wrapPokemonItem.current;
+    const elem = wrapPokeCard.children[wrapPokeCard.children.length - 1];
+    const elemTop = elem.offsetTop;
+    const elemBottom = elemTop + elem.offsetHeight;
+    scroll.scrollTo(elemBottom + 110, {
+      duration: 500,
+      delay: 300,
+      smooth: true,
+    });
+  };
+
+  const goTop = () => {
+    scroll.scrollTo(0, {
+      duration: 1500,
+      delay: 100,
+      smooth: true,
+    });
   };
 
   useEffect(() => {
@@ -24,19 +52,24 @@ const PokemonCard = ({ pokemonFilter }) => {
       handleFirstRender.current = false;
     } else {
       if (pokemonFilter.length > 0) {
-        setWrapPokemonChildrenLength(wrapPokemonItem.current.children.length);
-      }
-      if (wrapPokemonItem.current.children.length > 12) {
-        setTimeout(() => {
-          const elemTop =
-            wrapPokemonItem.current.children[
-              wrapPokemonItem.current.children.length - 12
-            ].offsetTop;
-          window.scroll({ top: elemTop, behavior: "smooth" });
-        }, 300);
+        setPokemonChildrenLength(wrapPokemonItem.current.children.length);
       }
     }
   });
+
+  useEffect(()=>{
+    window.scrollTo(0, scrollTopPosition);
+  },[])
+
+  if(!pokemonFilter || !Array.isArray(pokemonFilter)) {
+        return (
+          <NotFoundPokemon>
+            <div className="wrap-notfound-pokemon">
+              <h2>500: Internal Server Error, please try again.</h2>
+            </div>
+          </NotFoundPokemon>
+        );
+  }
 
   if (pokemonFilter.length === 0) {
     return (
@@ -49,50 +82,73 @@ const PokemonCard = ({ pokemonFilter }) => {
   }
   return (
     <>
-      <div className="row" ref={wrapPokemonItem}>
+      <WrapGoTopButton onClick={() => goTop()} className="go-top-btn" />
+      <PokemonRow className="pokemon-row" ref={wrapPokemonItem}>
         {pokemonFilter.slice(0, pokemonEndPoint).map((value, index) => {
-          const regExp = /\/(\d+)\//;
-          const pokemonNumber = regExp.exec(value.url);
-          const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${pokemonNumber[1]}.png`;
-          const firstCharUpperCaseName = value.name
+          const { id, name, types } = value;
+          const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+          const firstCharUpperCaseName = name
             .split(" ")
             .map((char) => {
               return char.charAt(0).toUpperCase() + char.substring(1);
             })
             .join("");
-          const errorIMG = `./public_images/pokemon-notfound/poke${pokemonNumber[1]}.png`;
+
+          const errorIMG = `./public_images/pokemon-notfound/poke${id}.png`;
+
           return (
-            <PokeCard key={pokemonNumber[1]} className="col-3">
-              <div className="wrap-pokecard">
-                <LazyLoadImage
-                  src={pokemonImage}
-                  className="pokemon-image"
-                  placeholderSrc={loadingIMG}
-                  effect="blur"
-                  onError={(event) => (event.target.src = errorIMG)}
-                />
-                <div className="wrap-name">
-                  <h4>{pokemonNumber[1]}</h4>
-                  <h3>{firstCharUpperCaseName}</h3>
+            <PokeCard key={id} id={id}>
+              <Link to={`/pokemon/${id}`} onClick={() => setScrollTopPosition(window.pageYOffset)}>
+                <div className="wrap-image">
+                  <LazyLoadImage
+                    src={pokemonImage}
+                    className="pokemon-image img-fit"
+                    placeholderSrc={loadingIMG}
+                    effect="blur"
+                    onError={(event) => (event.target.src = errorIMG)}
+                  />
                 </div>
-              </div>
+                <div className="wrap-info">
+                  <h4 className="number">No. {id}</h4>
+                  <h3 className="name">{firstCharUpperCaseName}</h3>
+                </div>
+                <div className="wrap-types">
+                  {types.map(({ type }, index) => {
+                    const typesCapitalizeChar = type.name
+                      .split(" ")
+                      .map((char) => {
+                        return char.charAt(0).toUpperCase() + char.substring(1);
+                      })
+                      .join("");
+
+                    return (
+                      <span
+                        className="types thicker"
+                        style={{ backgroundColor: typesColor[type.name] }}
+                      >
+                        {typesCapitalizeChar}
+                      </span>
+                    );
+                  })}
+                </div>
+              </Link>
             </PokeCard>
           );
         })}
-      </div>
+      </PokemonRow>
 
       <LoadingMore>
         <div className="wrap-button">
           {handleFirstRender.current == false &&
           pokemonChildrenLength >= pokemonFilter.length ? (
-            <button className="no-more-item">No More Item</button>
+            <a className="no-more-item">No More Item</a>
           ) : (
-            <button
+            <AnchorLink
               className="loading-more"
               onClick={() => handleLoadingMore()}
             >
               Loading More...
-            </button>
+            </AnchorLink>
           )}
         </div>
       </LoadingMore>
@@ -100,37 +156,133 @@ const PokemonCard = ({ pokemonFilter }) => {
   );
 };
 
+const PokemonRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 10px;
+  padding-top: 17px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 450px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const PokeCard = styled.div`
-  .wrap-pokecard {
-    position: relative;
-    background-image: url(${PokemonCardBackground});
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 500px;
-    margin-bottom: 30px;
+  position: relative;
+  background-image: url("${PokemonCardBackground}");
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 36vw;
+
+  a {
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
   }
-  .wrap-name {
+
+  .wrap-image {
     position: absolute;
-  }
-  .pokemon-image {
-    position: absolute;
-    top: 40px;
+    top: 10.5%;
     left: 50%;
     transform: translateX(-50%);
-    height: 140px;
-    width: 140px;
   }
-  span.lazy-load-image-background {
+
+  .wrap-info {
     position: absolute;
-    width: 240px;
-    height: 230px;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 60%;
+    left: 10%;
+    text-align: left;
+    .number {
+      font-size: 2vw;
+    }
+    .name {
+      font-size: 2vw;
+      letter-spacing: 0.5px;
+    }
+  }
+  .wrap-types {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    .types {
+      margin-right: 15px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1.2vw;
+      letter-spacing: 0.5px;
+    }
   }
   .lazy-load-image-background.blur {
+    width: 12vw;
+    height: 12vw;
     filter: blur(0.1px) !important;
+  }
+
+  @media (max-width: 992px) {
+    height: 46vw;
+    .wrap-image {
+      top: 11.5%;
+      .lazy-load-image-background.blur {
+        width: 15vw;
+        height: 15vw;
+      }
+    }
+    .number {
+      font-size: 2.7vw !important;
+    }
+    .name {
+      font-size: 2.8vw !important;
+    }
+    .types {
+      font-size: 1.8vw !important;
+    }
+  }
+  @media (max-width: 768px) {
+    height: 70vw;
+    .wrap-image {
+      top: 11.5%;
+      .lazy-load-image-background.blur {
+        width: 23vw;
+        height: 23vw;
+      }
+    }
+    .number {
+      font-size: 3.7vw !important;
+    }
+    .name {
+      font-size: 3.8vw !important;
+    }
+    .types {
+      font-size: 2.8vw !important;
+    }
+  }
+  @media (max-width: 450px) {
+    height: 140vw;
+    .wrap-image {
+      top: 11.5%;
+      .lazy-load-image-background.blur {
+        width: 43vw;
+        height: 43vw;
+      }
+    }
+    .number {
+      font-size: 5.7vw !important;
+    }
+    .name {
+      font-size: 5.8vw !important;
+    }
+    .types {
+      font-size: 4.8vw !important;
+    }
   }
 `;
 
@@ -155,8 +307,8 @@ const NotFoundPokemon = styled.div`
 `;
 
 const LoadingMore = styled.div`
-  margin-top: 30px;
-  button.no-more-item {
+  margin: 30px 0;
+  a.no-more-item {
     color: #fff;
     font-size: 22px;
     letter-spacing: 1px;
@@ -167,7 +319,7 @@ const LoadingMore = styled.div`
     outline: none;
     cursor: no-drop;
   }
-  button.loading-more {
+  a.loading-more {
     color: #fff;
     font-size: 22px;
     letter-spacing: 1px;
@@ -182,6 +334,19 @@ const LoadingMore = styled.div`
       background: #000;
     }
   }
+`;
+
+const WrapGoTopButton = styled.div`
+  background: url(${topButton});
+  background-size: cover;
+  background-position:0px;
+  position: fixed;
+  top: 0;
+  right: 3px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 1;
 `;
 
 export default PokemonCard;

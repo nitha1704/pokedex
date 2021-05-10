@@ -15,12 +15,13 @@ const SearchBar = () => {
     setPokemon,
     pokemonSearchData,
     setPokemonFilter,
+    pokemonName,
+    setPokemonName,
     pokemonEndPoint,
     setPokemonEndPoint,
   } = useContext(PokedexContext);
-  const [pokemonName, setPokemonName] = useState("");
-  const [showSearchBar, setShowSearchBar] = useState(false);
 
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const handleSearch = (pokemonName) => {
     setPokemonName(pokemonName);
@@ -33,7 +34,7 @@ const SearchBar = () => {
 
   const handleCloseSearch = (event) => {
     const elem = document.querySelector(".searchbar-container");
-    if(elem && !elem.contains(event.target)) {
+    if (elem && !elem.contains(event.target)) {
       setShowSearchBar(false);
     }
   };
@@ -41,11 +42,11 @@ const SearchBar = () => {
   const handleSubmitSearch = () => {
     const filterPokemon = pokemon.filter((value, index) => {
       return value.name.toLowerCase().includes(pokemonName.toLowerCase());
-    })
+    });
     setPokemonFilter(filterPokemon);
     setPokemonEndPoint(12);
     setShowSearchBar(false);
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleCloseSearch);
@@ -67,6 +68,7 @@ const SearchBar = () => {
         onChange={(event) => {
           handleSearch(event.target.value);
         }}
+        onKeyDown={(event) => event.key === "Enter" && handleSubmitSearch()}
       />
       <div className="wrap-search-image" onClick={() => handleSubmitSearch()}>
         <img src={searchIMG} alt="search-image" />
@@ -79,6 +81,7 @@ const SearchBar = () => {
               value.name.toLowerCase().includes(pokemonName.toLowerCase())
             )
             .map((value) => {
+              console.log(value);
               const firstCharUpperCase = value.name.split(" ").map((char) => {
                 return char.charAt(0).toUpperCase() + char.substring(1);
               });
@@ -113,11 +116,13 @@ const WrapSearchBar = styled.div`
 
   input {
     width: 100%;
-    max-height: 50px;
+    max-height: 40px;
     outline: none;
     padding: 10px;
-    font-size: 23px;
+    font-size: 21px;
     text-transform: capitalize;
+    letter-spacing: 0.5px;
+
   }
 
   .wrap-search-image {
@@ -129,6 +134,10 @@ const WrapSearchBar = styled.div`
     transform: translateY(-50%);
     background: #b4ebff;
     cursor: pointer;
+    transition:0.3s;
+    &:hover {
+      background: #B2ECFF;
+    }
 
     img {
       height: 25px;
@@ -166,8 +175,12 @@ const WrapSearchBar = styled.div`
       border-top: none !important;
       border: 1.2px solid #8b949e;
     }
+    }
   }
-
+    @media(max-width:450px){
+      input{
+        font-size:5vw;
+      }
 
 `;
 
