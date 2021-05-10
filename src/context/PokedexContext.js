@@ -21,31 +21,32 @@ const GlobalContext = ({ children }) => {
   const [scrollTopPosition, setScrollTopPosition] = useState(0);
 
   // Types Color
-    const typesColor = {
-      grass: "#66f609",
-      fire: "#fb0b0a",
-      water: "#35aef5",
-      normal: "#cbc8a9",
-      flying: "#075663",
-      bug: "#90b92d",
-      poison: "#60127f",
-      electric: "#fef923",
-      ground: "#beab20",
-      fighting: "#7f0a10",
-      psychic: "#890431",
-      rock: "#93824e",
-      ice: "#65d0e4",
-      ghost: "#462a52",
-      dragon: "#8954fc",
-      dark: "#2c211b",
-      steel: "#bac4c3",
-      fairy: "#fe9fc1",
-    };
+  const typesColor = {
+    grass: "#66f609",
+    fire: "#fb0b0a",
+    water: "#35aef5",
+    normal: "#cbc8a9",
+    flying: "#075663",
+    bug: "#90b92d",
+    poison: "#60127f",
+    electric: "#fef923",
+    ground: "#beab20",
+    fighting: "#7f0a10",
+    psychic: "#890431",
+    rock: "#93824e",
+    ice: "#65d0e4",
+    ghost: "#462a52",
+    dragon: "#8954fc",
+    dark: "#2c211b",
+    steel: "#bac4c3",
+    fairy: "#fe9fc1",
+  };
 
   const getData = async () => {
     setLoading(true);
+
     const url1 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=800")
       .then((res) => res.data)
       .then((res2) => res2.results)
       .then((res3) =>
@@ -53,6 +54,7 @@ const GlobalContext = ({ children }) => {
           return axios.get(item.url).then((res) => res.data);
         })
       );
+
     const url2 = await axios
       .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
       .then((res) => res.data.results)
@@ -66,6 +68,24 @@ const GlobalContext = ({ children }) => {
             .then((res) => res.data);
         })
       );
+
+    // const url3 = await axios
+    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=800")
+    //   .then((res) => res.data)
+    //   .then((res2) => res2.results)
+    //   .then((res3) =>
+    //     res3.map((item) => {
+    //       return axios
+    //         .get(item.url)
+    //         .then((res) => res.data).then(res2 => {
+    //           const {sprites, ...newRes} = res2;
+    //           return newRes;     
+    //         })
+    //     })
+    //   )
+    //   .then(res4 => Promise.all(res4).then(res4Arr=>console.log(res4Arr)))
+
+
     const pokemonData = await Promise.all([url1, url2])
       .then((res) =>
         res.map((item) => {
@@ -79,48 +99,52 @@ const GlobalContext = ({ children }) => {
       );
 
     // Single Page Pokemon Information
-    const pokemonInfo1 = Array.isArray(pokemonData) ? pokemonData[0].map((item) => {
-      return {
-        id: item.id,
-        name: item.name,
-        height: {
-          decimetres: item.height,
-          centimeter: item.height * 10,
-          feet: Number(item.height * 0.328084).toFixed(2),
-        },
-        weight: {
-          killogram: Math.round(item.weight * 0.1),
-          pound: Number(item.weight * 0.220462).toFixed(2),
-        },
-        stat: item.stats.reduce((acc, total) => {
-          if (!acc[total.stat.name]) {
-            acc[total.stat.name] = total.base_stat;
-          }
-          return acc;
-        }, {}),
-        abilities: item.abilities
-          .map(({ ability }) => {
-            return (
-              ability.name.charAt(0).toUpperCase() + ability.name.substring(1)
-            );
-          })
-          .join(", "),
-        EVs: item.stats
-          .filter((stat) => {
-            return stat.effort > 0;
-          })
-          .map((item) => {
-            return `${item.effort} ${item.stat.name.split(" ").map((char) => {
-              return char.charAt(0).toUpperCase() + char.substring(1);
-            })}`;
-          })
-          .join(", "),
-        type: item.types.map(({ type }) => {
-          return type.name.charAt(0).toUpperCase() + type.name.substring(1);
-        }),
-      };
-    })
-    : null;    
+    const pokemonInfo1 = Array.isArray(pokemonData)
+      ? pokemonData[0].map((item) => {
+          return {
+            id: item.id,
+            name: item.name,
+            height: {
+              decimetres: item.height,
+              centimeter: item.height * 10,
+              feet: Number(item.height * 0.328084).toFixed(2),
+            },
+            weight: {
+              killogram: Math.round(item.weight * 0.1),
+              pound: Number(item.weight * 0.220462).toFixed(2),
+            },
+            stat: item.stats.reduce((acc, total) => {
+              if (!acc[total.stat.name]) {
+                acc[total.stat.name] = total.base_stat;
+              }
+              return acc;
+            }, {}),
+            abilities: item.abilities
+              .map(({ ability }) => {
+                return (
+                  ability.name.charAt(0).toUpperCase() +
+                  ability.name.substring(1)
+                );
+              })
+              .join(", "),
+            EVs: item.stats
+              .filter((stat) => {
+                return stat.effort > 0;
+              })
+              .map((item) => {
+                return `${item.effort} ${item.stat.name
+                  .split(" ")
+                  .map((char) => {
+                    return char.charAt(0).toUpperCase() + char.substring(1);
+                  })}`;
+              })
+              .join(", "),
+            type: item.types.map(({ type }) => {
+              return type.name.charAt(0).toUpperCase() + type.name.substring(1);
+            }),
+          };
+        })
+      : null;
 
     const pokemonInfo2 = Array.isArray(pokemonData)
       ? pokemonData[1].map((item) => {
@@ -145,8 +169,8 @@ const GlobalContext = ({ children }) => {
           };
         })
       : null;
-
-    if (pokemonInfo1 && pokemonInfo2){
+    console.log(pokemonData);
+    if (pokemonInfo1 && pokemonInfo2) {
       // Pokemon Global Data
       setPokemon(pokemonData[0]);
       setPokemonFilter(pokemonData[0]);
@@ -157,7 +181,7 @@ const GlobalContext = ({ children }) => {
     } else {
       setPokemonFilter(undefined);
     }
-      setLoading(false);
+    setLoading(false);
   };
 
   useEffect(() => {
