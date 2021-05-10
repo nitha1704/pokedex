@@ -56,7 +56,7 @@ const GlobalContext = ({ children }) => {
       );
 
     const url2 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=100")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
       .then((res) => res.data.results)
       .then((res2) =>
         res2.map((item) => {
