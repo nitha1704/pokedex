@@ -46,7 +46,7 @@ const GlobalContext = ({ children }) => {
     setLoading(true);
 
     const url1 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=800")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=100")
       .then((res) => res.data)
       .then((res2) => res2.results)
       .then((res3) =>
@@ -56,7 +56,7 @@ const GlobalContext = ({ children }) => {
       );
 
     const url2 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=100")
       .then((res) => res.data.results)
       .then((res2) =>
         res2.map((item) => {
@@ -79,12 +79,11 @@ const GlobalContext = ({ children }) => {
     //         .get(item.url)
     //         .then((res) => res.data).then(res2 => {
     //           const {sprites, ...newRes} = res2;
-    //           return newRes;     
+    //           return newRes;
     //         })
     //     })
     //   )
     //   .then(res4 => Promise.all(res4).then(res4Arr=>console.log(res4Arr)))
-
 
     const pokemonData = await Promise.all([url1, url2])
       .then((res) =>
