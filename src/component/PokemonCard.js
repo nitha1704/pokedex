@@ -176,7 +176,7 @@ const PokemonRow = styled.div`
 
 const PokeCard = styled.div`
   position: relative;
-  background-image: url("./public_images/pokemon_card_bg_public.png");
+  background-image: url("${PokemonCardBackground}");
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;

@@ -43,7 +43,7 @@ const GlobalContext = ({ children }) => {
   };
 
   const pokemonIndexNumber = [];
-  for (let i = 1; i <= 898; i++) {
+  for (let i = 1; i <= 100; i++) {
     pokemonIndexNumber.push(i);
   }
 
