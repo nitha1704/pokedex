@@ -50,31 +50,6 @@ const GlobalContext = ({ children }) => {
   const getData = async () => {
     setLoading(true);
 
-    // const url1 = await axios
-    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=30")
-    //   .then((res) => res.data)
-    //   .then((res2) => res2.results)
-    //   .then((res3) =>
-    //     res3.map((item) => {
-    //       return axios.get(item.url).then((res) => res.data);
-    //     })
-    //   );
-
-    // const url2 = await axios
-    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=30")
-    //   .then((res) => res.data.results)
-    //   .then((res2) =>
-    //     res2.map((item) => {
-    //       const pokemonNumber = item.url
-    //         .replace("https://pokeapi.co/api/v2/pokemon/", "")
-    //         .replace("/", "");
-    //       return axios
-    //         .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonNumber}/`)
-    //         .then((res) => res.data);
-    //     })
-    //   );
-
-
     const q1 = await Promise.all(
       pokemonIndexNumber.map((item) => {
         return axios
@@ -90,21 +65,6 @@ const GlobalContext = ({ children }) => {
           .then((res) => res.data);
       })
     ).then((res2) => res2);
-
-    console.log(q1, q2)
-
-    
-    // const pokemonData = await Promise.all([url1, url2])
-    //   .then((res) =>
-    //     res.map((item) => {
-    //       return Promise.all(item).then((res) => res);
-    //     })
-    //   )
-    //   .then((res2) =>
-    //     Promise.all(res2)
-    //       .then((res3) => undefined)
-    //       .catch((err) => console.log(err))
-    //   );
 
     // Single Page Pokemon Information
     const pokemonInfo1 = Array.isArray(q1)
