@@ -42,64 +42,73 @@ const GlobalContext = ({ children }) => {
     fairy: "#fe9fc1",
   };
 
+  const pokemonIndexNumber = [];
+  for (let i = 1; i <= 898; i++) {
+    pokemonIndexNumber.push(i);
+  }
+
   const getData = async () => {
     setLoading(true);
 
-    const url1 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=300")
-      .then((res) => res.data)
-      .then((res2) => res2.results)
-      .then((res3) =>
-        res3.map((item) => {
-          return axios.get(item.url).then((res) => res.data);
-        })
-      );
-
-    const url2 = await axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=300")
-      .then((res) => res.data.results)
-      .then((res2) =>
-        res2.map((item) => {
-          const pokemonNumber = item.url
-            .replace("https://pokeapi.co/api/v2/pokemon/", "")
-            .replace("/", "");
-          return axios
-            .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonNumber}/`)
-            .then((res) => res.data);
-        })
-      );
-
-    // const url3 = await axios
-    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=800")
+    // const url1 = await axios
+    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=30")
     //   .then((res) => res.data)
     //   .then((res2) => res2.results)
     //   .then((res3) =>
     //     res3.map((item) => {
+    //       return axios.get(item.url).then((res) => res.data);
+    //     })
+    //   );
+
+    // const url2 = await axios
+    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=30")
+    //   .then((res) => res.data.results)
+    //   .then((res2) =>
+    //     res2.map((item) => {
+    //       const pokemonNumber = item.url
+    //         .replace("https://pokeapi.co/api/v2/pokemon/", "")
+    //         .replace("/", "");
     //       return axios
-    //         .get(item.url)
-    //         .then((res) => res.data).then(res2 => {
-    //           const {sprites, ...newRes} = res2;
-    //           return newRes;
-    //         })
+    //         .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonNumber}/`)
+    //         .then((res) => res.data);
+    //     })
+    //   );
+
+
+    const q1 = await Promise.all(
+      pokemonIndexNumber.map((item) => {
+        return axios
+          .get(`https://pokeapi.co/api/v2/pokemon/${item}/`)
+          .then((res) => res.data);
+      })
+    ).then((res2) => res2);
+
+    const q2 = await Promise.all(
+      pokemonIndexNumber.map((item) => {
+        return axios
+          .get(`https://pokeapi.co/api/v2/pokemon-species/${item}/`)
+          .then((res) => res.data);
+      })
+    ).then((res2) => res2);
+
+    console.log(q1, q2)
+
+    
+    // const pokemonData = await Promise.all([url1, url2])
+    //   .then((res) =>
+    //     res.map((item) => {
+    //       return Promise.all(item).then((res) => res);
     //     })
     //   )
-    //   .then(res4 => Promise.all(res4).then(res4Arr=>console.log(res4Arr)))
-
-    const pokemonData = await Promise.all([url1, url2])
-      .then((res) =>
-        res.map((item) => {
-          return Promise.all(item).then((res) => res);
-        })
-      )
-      .then((res2) =>
-        Promise.all(res2)
-          .then((res3) => res3)
-          .catch((err) => console.log(err))
-      );
+    //   .then((res2) =>
+    //     Promise.all(res2)
+    //       .then((res3) => undefined)
+    //       .catch((err) => console.log(err))
+    //   );
 
     // Single Page Pokemon Information
-    const pokemonInfo1 = Array.isArray(pokemonData)
-      ? pokemonData[0].map((item) => {
+    const pokemonInfo1 = Array.isArray(q1)
+      ? q1.map((item) => {
           return {
             id: item.id,
             name: item.name,
@@ -145,8 +154,8 @@ const GlobalContext = ({ children }) => {
         })
       : null;
 
-    const pokemonInfo2 = Array.isArray(pokemonData)
-      ? pokemonData[1].map((item) => {
+    const pokemonInfo2 = Array.isArray(q2)
+      ? q2.map((item) => {
           return {
             id: item.id,
             name: item.name,
@@ -168,12 +177,12 @@ const GlobalContext = ({ children }) => {
           };
         })
       : null;
-    console.log(pokemonData);
+
     if (pokemonInfo1 && pokemonInfo2) {
       // Pokemon Global Data
-      setPokemon(pokemonData[0]);
-      setPokemonFilter(pokemonData[0]);
-      setPokemonSearchData(pokemonData[0]);
+      setPokemon(q1);
+      setPokemonFilter(q1);
+      setPokemonSearchData(q1);
       // Pokemon Single Page Data
       setPokemonInformation1(pokemonInfo1);
       setPokemonInformation2(pokemonInfo2);

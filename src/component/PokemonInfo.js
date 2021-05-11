@@ -1061,12 +1061,22 @@ const PokemonInfoSection = styled.section`
   }
   @media (max-width: 768px) {
     .nav-left {
-      content: url(${navLeftMobile});
-      width: 23vw !important;
+      background: url(${navLeftMobile});
+      padding: 12vw;
+      background-size: contain;
+      background-position: initial;
+      background-repeat: no-repeat;
+      width: 0 !important;
+      height: 0 !important;
     }
     .nav-right {
-      content: url(${navRightMobile});
-      width: 23vw !important;
+      background: url(${navRightMobile});
+      padding: 12vw;
+      background-size: contain;
+      background-position: initial;
+      background-repeat: no-repeat;
+      width: 0 !important;
+      height: 0 !important;
     }
     .pokemon-info-navigator .id,
     .pokemon-info-navigator .name {
@@ -1074,14 +1084,14 @@ const PokemonInfoSection = styled.section`
     }
     .pokemon-info-navigator .pokemon-info-navigator-left .arrow-left,
     .pokemon-info-navigator .pokemon-info-navigator-left .arrow-left-active {
-      top: 16%;
+      top: 12%;
       left: 3%;
       width: 8vw;
       height: 8vw;
     }
     .pokemon-info-navigator .pokemon-info-navigator-right .arrow-right,
     .pokemon-info-navigator .pokemon-info-navigator-right .arrow-right-active {
-      top: 16%;
+      top: 12%;
       right: 3%;
       width: 8vw;
       height: 8vw;
