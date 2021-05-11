@@ -65,6 +65,15 @@ const GlobalContext = ({ children }) => {
           .then((res) => res.data);
       })
     ).then((res2) => res2);
+      // console.log(q1, q2)
+
+    // const q3 = pokemonIndexNumber.map((item)=>{
+    //   return axios.all([
+    //     axios.get(`https://pokeapi.co/api/v2/pokemon/${item}/`),
+    //     axios.get(`https://pokeapi.co/api/v2/pokemon-species/${item}/`),
+    //   ]).then(res => Promise.all(res).then(res2=>console.log(res2)))
+    // })
+    // console.log(q3)
 
     // Single Page Pokemon Information
     const pokemonInfo1 = Array.isArray(q1)
