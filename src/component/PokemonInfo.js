@@ -37,7 +37,13 @@ const PokemonInfo = () => {
 
   const { id: id_url } = useParams();
   const pokemonIndex = parseInt(id_url - 1);
-  const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id_url}.png`;
+  //const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id_url}.png`;
+  const pokemonImage =
+    id_url < 10
+      ? `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/00${id_url}.png`
+      : id_url < 100
+      ? `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/0${id_url}.png`
+      : `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id_url}.png`;
   const prevPokemon = pokemonInformation1
     ? pokemonInformation1[pokemonIndex - 1]
     : undefined;
