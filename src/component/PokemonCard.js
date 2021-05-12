@@ -84,7 +84,7 @@ const PokemonCard = ({ pokemonFilter }) => {
     <>
       <WrapGoTopButton onClick={() => goTop()} className="go-top-btn" />
       <PokemonRow className="pokemon-row" ref={wrapPokemonItem}>
-        {pokemonFilter.slice(0, pokemonEndPoint).map((value, index) => {
+        {pokemonFilter.slice(0, 100).map((value, index) => {
           const { id, name, types } = value;
           const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
           const firstCharUpperCaseName = name
@@ -98,13 +98,17 @@ const PokemonCard = ({ pokemonFilter }) => {
 
           return (
             <PokeCard key={id} id={id}>
-              <Link to={`/pokemon/${id}`} onClick={() => setScrollTopPosition(window.pageYOffset)}>
+              <Link
+                to={`/pokemon/${id}`}
+                onClick={() => setScrollTopPosition(window.pageYOffset)}
+              >
                 <div className="wrap-image">
                   <LazyLoadImage
                     src={pokemonImage}
                     className="pokemon-image img-fit"
                     placeholderSrc={loadingIMG}
                     effect="blur"
+                    threshold="10"
                     onError={(event) => (event.target.src = errorIMG)}
                   />
                 </div>
