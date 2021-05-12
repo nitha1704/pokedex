@@ -60,7 +60,7 @@ const SearchBar = () => {
       <input
         type="text"
         value={pokemonName}
-        placeholder="Enter Pokemon Name"
+        placeholder="Search for Pokemon"
         className="searchbar"
         onClick={() => {
           pokemonName ? setShowSearchBar(true) : setShowSearchBar(false);

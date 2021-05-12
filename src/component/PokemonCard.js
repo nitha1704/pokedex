@@ -11,7 +11,7 @@ import PokemonCardBackground from "../images/pokemon_card_bg.png";
 // Loading Image
 import loadingIMG from "../images/loading-img/loading2-small.gif";
 // Go Top Button
-import topButton from "../images/kisspng-button-download-ppt-top-button-5aa126b3bc8435.2277196315205106437722.png";
+import topButton from "../images/arrowtop-removebg-preview.png";
 
 const PokemonCard = ({ pokemonFilter }) => {
 
@@ -84,9 +84,16 @@ const PokemonCard = ({ pokemonFilter }) => {
     <>
       <WrapGoTopButton onClick={() => goTop()} className="go-top-btn" />
       <PokemonRow className="pokemon-row" ref={wrapPokemonItem}>
-        {pokemonFilter.slice(0, 100).map((value, index) => {
+        {pokemonFilter.slice(0, pokemonEndPoint).map((value, index) => {
           const { id, name, types } = value;
-          const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+          //const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+          const pokemonImage =
+            id < 10
+              ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${id}.png`
+              : id < 100
+              ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png`
+              : `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
+          console.log(id)
           const firstCharUpperCaseName = name
             .split(" ")
             .map((char) => {
@@ -343,12 +350,14 @@ const LoadingMore = styled.div`
 const WrapGoTopButton = styled.div`
   background: url(${topButton});
   background-size: cover;
-  background-position:0px;
+  background-position: 0px;
   position: fixed;
   top: 0;
   right: 3px;
   width: 50px;
   height: 50px;
+  border: 2px solid white;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 1;
 `;
