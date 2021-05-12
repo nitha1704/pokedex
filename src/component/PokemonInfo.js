@@ -15,7 +15,7 @@ import femaleGender from "../images/icon_female.png";
 import genderless from "../images/oie_transparent.png";
 
 // Loading Image
-import loadingIMG from "../images/loading-img/loading1-small250x250.gif";
+import loadingIMG from "../images/loading-img/loading250x250-2.gif";
 import loadingIMG2 from "../images/loading-img/pokemon-loading6.gif";
 import loadingIMG3 from "../images/loading-img/loading3.gif";
 

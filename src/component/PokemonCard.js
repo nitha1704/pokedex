@@ -9,7 +9,7 @@ import "../../node_modules/react-lazy-load-image-component/src/effects/blur.css"
 // Background
 import PokemonCardBackground from "../images/pokemon_card_bg.png";
 // Loading Image
-import loadingIMG from "../images/loading-img/loading2.gif";
+import loadingIMG from "../images/loading-img/loading2-small.gif";
 // Go Top Button
 import topButton from "../images/kisspng-button-download-ppt-top-button-5aa126b3bc8435.2277196315205106437722.png";
 
