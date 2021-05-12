@@ -31,12 +31,8 @@ import arrowRight from "../images/arrow_right_btn.png";
 import arrowRightActive from "../images/arrow_right_btn_on.png";
 
 const PokemonInfo = () => {
-  const {
-    loading,
-    typesColor,
-    pokemonInformation1,
-    pokemonInformation2,
-  } = useContext(PokedexContext);
+  const { loading, typesColor, pokemonInformation1, pokemonInformation2 } =
+    useContext(PokedexContext);
   const [isImgLoading, setIsImgLoading] = useState(true);
 
   const { id: id_url } = useParams();
@@ -55,7 +51,6 @@ const PokemonInfo = () => {
     !Array.isArray(pokemonInformation2) ||
     pokemonInformation1.length <= 0 ||
     pokemonInformation2.length <= 0;
-
 
   // Scroll
   let scrollTop = window.pageYOffset;
