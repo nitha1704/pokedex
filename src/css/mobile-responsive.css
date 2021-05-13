@@ -260,11 +260,13 @@
 
 /* Safari 10.1+ */
 @media not all and (min-resolution: 0.001dpcm) {
-  .app {
-    height: 467vw !important;
-    overflow: hidden;
-  }
   .pokemon-info-section5 h4 {
     top: -2vw !important;
+  }
+  @media (max-width: 992px) {
+    .app {
+      min-height: 467vw !important;
+      overflow: hidden;
+    }
   }
 }
