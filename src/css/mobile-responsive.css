@@ -258,9 +258,10 @@
   }
 }
 
-/* Safari */
-/* Safari 9+ */
 
+
+
+/* Safari 9+ */
 @supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
   .sub-title {
     font-weight: bold;
@@ -280,20 +281,8 @@
   .mainmenu a {
     font-family: "gotHamBlack";
   }
-
-
-
-
-
-
-
-  /* Safari 9+ Responsive */
-
-@supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
-      .pokemon-header-title {
-      color: red !important; 
-    }
 }
+
 /* Safari 10.1+ */
 @media not all and (min-resolution: 0.001dpcm) {
   @media {
