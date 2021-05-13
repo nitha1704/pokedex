@@ -266,7 +266,7 @@
   @media (max-width: 992px) {
     .app {
       min-height: 467vw !important;
-      overflow: hidden;
+      overflow: initial !important;
     }
   }
 }
