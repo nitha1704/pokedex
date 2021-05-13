@@ -258,11 +258,18 @@
   }
 }
 
-
 /* Safari 10.1+ */
 @media not all and (min-resolution: 0.001dpcm) {
   @media {
     .pokemon-header-title {
+      color: red !important;
+    }
+  }
+  @media (max-width: 992px) {
+    .pokemon-header-title {
+      color: green !important;
+    }
+    body {
       color: red !important;
     }
   }
