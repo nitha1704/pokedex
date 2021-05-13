@@ -259,12 +259,43 @@
 }
 
 /* Safari */
-_::-webkit-full-page-media,
-_:future,
-:root .safari_only {
-  @media (max-width: 1200px) {
+/* Safari 9+ */
+
+@supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
+  .sub-title {
+    font-weight: bold;
+  }
+  .bdbutton,
+  .bdbutton.submit,
+  .bdbuttonContact-section1-1100px {
+    font-family: "gotHamBlack";
+    font-weight: normal;
+  }
+  .bdbuttonContact-section1-1100px {
+    text-shadow: 0px 0px;
+  }
+  .sub-title.unOrdinary {
+    letter-spacing: 1px;
+  }
+  .mainmenu a {
+    font-family: "gotHamBlack";
+  }
+
+
+
+
+
+
+
+  /* Safari 9+ Responsive */
+
+
+/* Safari 10.1+ */
+@media not all and (min-resolution: 0.001dpcm) {
+  @media {
     body {
-      color:  red !important;
+      color: red !important; 
     }
   }
 }
+
