@@ -268,5 +268,8 @@
       min-height: 467vw !important;
       overflow: initial !important;
     }
+    .loading-more-button {
+      margin:40px 0 !important;
+    }
   }
 }

@@ -148,7 +148,7 @@ const PokemonCard = ({ pokemonFilter }) => {
         })}
       </PokemonRow>
 
-      <LoadingMore>
+      <LoadingMore className="loading-more-button">
         <div className="wrap-button">
           {handleFirstRender.current == false &&
           pokemonChildrenLength >= pokemonFilter.length ? (
