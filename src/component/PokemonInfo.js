@@ -40,9 +40,9 @@ const PokemonInfo = () => {
   //const pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${id_url}.png`;
   const pokemonImage =
     id_url < 10
-      ? `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id_url}.png`
+      ? `https://assets.pokemon.com/assets/cms2/img/pokedex/full/00${id_url}.png`
       : id_url < 100
-      ? `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id_url}.png`
+      ? `https://assets.pokemon.com/assets/cms2/img/pokedex/full/0${id_url}.png`
       : `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id_url}.png`;
   const prevPokemon = pokemonInformation1
     ? pokemonInformation1[pokemonIndex - 1]
