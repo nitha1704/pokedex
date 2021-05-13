@@ -92,8 +92,8 @@ const PokemonCard = ({ pokemonFilter }) => {
               ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${id}.png`
               : id < 100
               ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png`
-              : `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
-          console.log(id)
+              : `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`
+
           const firstCharUpperCaseName = name
             .split(" ")
             .map((char) => {
