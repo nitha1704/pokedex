@@ -8,7 +8,7 @@ import PokemonList from "../component/PokemonList";
 const Home = () => {
   return (
     <section className="home-section">
-      <h1 className="pokemon-header-title">Pokedex</h1>
+      <h1 className="pokemon-header-title">Pokedex Change Machine</h1>
       <div className="pokemon-container">
         <SearchBar />
         <PokemonList />
