@@ -266,10 +266,10 @@
 }
 
 /* Safari 10.1+ */
-@media not all and (min-resolution: 0.001dpcm) {
+/* @media not all and (min-resolution: 0.001dpcm) {
   @media {
     .pokemon-header-title {
       color: red !important;
     }
   }
-}
+} */
