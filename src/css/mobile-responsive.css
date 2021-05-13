@@ -289,11 +289,15 @@
 
   /* Safari 9+ Responsive */
 
-
+@supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
+      .pokemon-header-title {
+      color: red !important; 
+    }
+}
 /* Safari 10.1+ */
 @media not all and (min-resolution: 0.001dpcm) {
   @media {
-    body {
+    .pokemon-header-title {
       color: red !important; 
     }
   }
