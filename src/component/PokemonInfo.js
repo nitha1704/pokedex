@@ -100,421 +100,423 @@ const PokemonInfo = () => {
   }, []);
 
   return (
-    <PokemonInfoSection className="pokemon-info">
-      {errorCondition ? null : (
-        <div className="pokemon-info-navigator">
-          {prevPokemon && (
-            <div className="pokemon-info-navigator-left">
-              <img src={navLeft} alt="nav-left" class="nav-left" />
-              <div className="prev-pokemon">
-                <div className="id">No.{prevPokemon.id}</div>
-                <div className="name">{prevPokemon.name}</div>
+    <WrapPokemonInfoSection className="wrap-pokemon-info-section">
+      <PokemonInfoSection className="pokemon-info">
+        {errorCondition ? null : (
+          <div className="pokemon-info-navigator">
+            {prevPokemon && (
+              <div className="pokemon-info-navigator-left">
+                <img src={navLeft} alt="nav-left" class="nav-left" />
+                <div className="prev-pokemon">
+                  <div className="id">No.{prevPokemon.id}</div>
+                  <div className="name">{prevPokemon.name}</div>
+                </div>
+                <Link
+                  to={`/pokemon/${parseInt(id_url) - 1}`}
+                  className="wrap-arrow-left"
+                  onClick={() => {
+                    setIsImgLoading(true);
+                    deleteAnimationBar();
+                  }}
+                >
+                  <img src={arrowLeft} alt="arrow-left" class="arrow-left" />
+                  <img
+                    src={arrowLeftActive}
+                    alt="arrow-left-active"
+                    class="arrow-left-active"
+                  />
+                </Link>
               </div>
-              <Link
-                to={`/pokemon/${parseInt(id_url) - 1}`}
-                className="wrap-arrow-left"
-                onClick={() => {
-                  setIsImgLoading(true);
-                  deleteAnimationBar();
-                }}
-              >
-                <img src={arrowLeft} alt="arrow-left" class="arrow-left" />
-                <img
-                  src={arrowLeftActive}
-                  alt="arrow-left-active"
-                  class="arrow-left-active"
-                />
-              </Link>
-            </div>
-          )}
+            )}
 
-          {nextPokemon && (
-            <div className="pokemon-info-navigator-right">
-              <img src={navRight} alt="nav-right" class="nav-right" />
-              <div className="next-pokemon">
-                <div className="id">No.{nextPokemon.id}</div>
-                <div className="name">{nextPokemon.name}</div>
+            {nextPokemon && (
+              <div className="pokemon-info-navigator-right">
+                <img src={navRight} alt="nav-right" class="nav-right" />
+                <div className="next-pokemon">
+                  <div className="id">No.{nextPokemon.id}</div>
+                  <div className="name">{nextPokemon.name}</div>
+                </div>
+                <Link
+                  to={`/pokemon/${parseInt(id_url) + 1}`}
+                  className="wrap-arrow-right"
+                  onClick={() => {
+                    setIsImgLoading(true);
+                    deleteAnimationBar();
+                  }}
+                >
+                  <img src={arrowRight} alt="arrow-right" class="arrow-right" />
+                  <img
+                    src={arrowRightActive}
+                    alt="arrow-right-active"
+                    class="arrow-right-active"
+                  />
+                </Link>
               </div>
-              <Link
-                to={`/pokemon/${parseInt(id_url) + 1}`}
-                className="wrap-arrow-right"
-                onClick={() => {
-                  setIsImgLoading(true);
-                  deleteAnimationBar();
-                }}
-              >
-                <img src={arrowRight} alt="arrow-right" class="arrow-right" />
-                <img
-                  src={arrowRightActive}
-                  alt="arrow-right-active"
-                  class="arrow-right-active"
-                />
-              </Link>
-            </div>
+            )}
+          </div>
+        )}
+
+        <div className="pokemon-container">
+          {loading ? (
+            <WrapLoading>
+              <img src={loadingIMG} />
+            </WrapLoading>
+          ) : errorCondition ? (
+            <ErrorWarning>
+              <h4>
+                An error has occured,&nbsp;
+                <span></span>
+                please try again.
+              </h4>
+            </ErrorWarning>
+          ) : (
+            <>
+              <div className="pokemon-info-section1">
+                <div className="wrap-image">
+                  <div className="pokemon-info-title">
+                    <h3 className="pokemonID">
+                      No. {pokemonInformation1[pokemonIndex].id}
+                    </h3>
+                    <h1 className="name">
+                      {pokemonInformation1[pokemonIndex].name}
+                    </h1>
+                  </div>
+                  <div className="wrap-pokemon-image">
+                    <img
+                      src={pokemonFrontCircleBackground}
+                      className="pokemon-front-circle-background"
+                      alt=""
+                    />
+                    <img
+                      src={pokemonBackCircleBackground}
+                      className="pokemon-back-circle-background"
+                      alt=""
+                    />
+                    <img
+                      src={isImgLoading ? loadingIMG2 : pokemonImage}
+                      className="pokemon-image-info"
+                      alt=""
+                      onLoad={() => setIsImgLoading(false)}
+                      onError={(e) => (e.target.src = errorImg)}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="pokemon-info-section2">
+                <div className="info height">
+                  <span>Height</span>
+                  <div className="wrap-height">
+                    <span className="cm">
+                      {pokemonInformation1[pokemonIndex].height.centimeter} cm
+                    </span>
+                    <span className="seperate">&nbsp;/&nbsp;</span>
+                    <span className="ft">
+                      {pokemonInformation1[pokemonIndex].height.feet} ft
+                    </span>
+                  </div>
+                </div>
+                <div className="info weight">
+                  <span>Weight</span>
+                  <div className="wrap-weight">
+                    <span className="kg">
+                      {pokemonInformation1[pokemonIndex].weight.killogram} kg
+                    </span>
+                    <span className="seperate">&nbsp;/&nbsp;</span>
+                    <span className="lbs">
+                      {pokemonInformation1[pokemonIndex].weight.pound} lbs
+                    </span>
+                  </div>
+                </div>
+                <div className="info capture-rate">
+                  <span>Capture Rate</span>
+                  <span>{pokemonInformation2[pokemonIndex].captureRate}</span>
+                </div>
+                <div className="info hatch-steps">
+                  <span>Hatch Steps</span>
+                  <span>{pokemonInformation2[pokemonIndex].hatchSteps}</span>
+                </div>
+                <div className="info abilities">
+                  <span>Abilities</span>
+                  <div className="wrap-abilities">
+                    <span>{pokemonInformation1[pokemonIndex].abilities}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pokemon-info-section3">
+                <div className="types">
+                  <h4 className="thicker">Types</h4>
+                  <div className="wrap-types">
+                    {pokemonInformation1[pokemonIndex].type.map((type) => {
+                      const typeLowerCase = type.toLowerCase();
+                      return (
+                        <span
+                          className="types thicker"
+                          style={{
+                            backgroundColor: `${typesColor[typeLowerCase]}`,
+                          }}
+                        >
+                          {type}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="gender-ratio">
+                  <h4>Gender Ratio</h4>
+                  <div className="wrap-line">
+                    {/* Male */}
+                    {pokemonInformation2[pokemonIndex].genderRatio
+                      .originalRate > -1 &&
+                      pokemonInformation2[pokemonIndex].genderRatio.maleRate >
+                        0 && (
+                        <div
+                          className="gender male"
+                          style={{
+                            width: `${pokemonInformation2[pokemonIndex].genderRatio.maleRate}%`,
+                          }}
+                        >
+                          <div className="graph">
+                            <img src={maleGender} alt="male-gender" />
+                          </div>
+                        </div>
+                      )}
+
+                    {/* Female */}
+                    {pokemonInformation2[pokemonIndex].genderRatio
+                      .originalRate > -1 &&
+                      pokemonInformation2[pokemonIndex].genderRatio.femaleRate >
+                        0 && (
+                        <div
+                          className="gender female"
+                          style={{
+                            width: `${pokemonInformation2[pokemonIndex].genderRatio.femaleRate}%`,
+                          }}
+                        >
+                          <div className="graph">
+                            <img src={femaleGender} alt="female-gender" />
+                          </div>
+                        </div>
+                      )}
+
+                    {/* Unknown Gender */}
+                    {pokemonInformation2[pokemonIndex].genderRatio
+                      .originalRate === -1 && (
+                      <div
+                        className="gender unknown"
+                        style={{
+                          width: "100%",
+                        }}
+                      >
+                        <div className="graph">
+                          <img src={genderless} alt="genderless" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="ratio-percent">
+                    {pokemonInformation2[pokemonIndex].genderRatio
+                      .originalRate >= 0 ? (
+                      <>
+                        {pokemonInformation2[pokemonIndex].genderRatio
+                          .maleRate > 0 && (
+                          <span className="male thicker">
+                            Male:&nbsp;
+                            {
+                              pokemonInformation2[pokemonIndex].genderRatio
+                                .maleRate
+                            }
+                            %
+                          </span>
+                        )}
+
+                        {pokemonInformation2[pokemonIndex].genderRatio
+                          .femaleRate > 0 && (
+                          <span className="female thicker">
+                            Female:&nbsp;
+                            {
+                              pokemonInformation2[pokemonIndex].genderRatio
+                                .femaleRate
+                            }
+                            %
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="unknown thicker">
+                        None (Unknown Gender)
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="wrap-group-and-evs">
+                  <div className="egg-group">
+                    <h4>
+                      {pokemonInformation2[pokemonIndex].eggGroups.length > 1
+                        ? "Egg Groups"
+                        : "Egg Group"}
+                    </h4>
+                    {pokemonInformation2[pokemonIndex].eggGroups.length > 0 ? (
+                      pokemonInformation2[pokemonIndex].eggGroups.map(
+                        (group, index) => {
+                          return <span key={index}>{group}</span>;
+                        }
+                      )
+                    ) : (
+                      <span>Undiscovered</span>
+                    )}
+                  </div>
+                  <div className="EVs">
+                    <h4>EVs</h4>
+                    <span>{pokemonInformation1[pokemonIndex].EVs}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pokemon-info-section4">
+                <div className="info description">
+                  <h4 className="thicker">Description</h4>
+                  <p>
+                    {
+                      pokemonInformation2[pokemonIndex].description[
+                        pokemonInformation2[pokemonIndex].description.length - 1
+                      ].flavor_text
+                    }
+                  </p>
+                </div>
+              </div>
+              <div className="pokemon-info-section5">
+                <h4>Status</h4>
+                <div className="wrap-status">
+                  <div className="status hp">
+                    <div className="description">HP:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat.hp}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {pokemonInformation1[pokemonIndex].stat.hp}
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="status attack">
+                    <div className="description">Attack:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat.attack}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {pokemonInformation1[pokemonIndex].stat.attack}
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="status defense">
+                    <div className="description">Defense:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat.defense}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {pokemonInformation1[pokemonIndex].stat.defense}
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="status speed">
+                    <div className="description">Speed:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat.speed}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {pokemonInformation1[pokemonIndex].stat.speed}
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="status special-attack">
+                    <div className="description">Special Attack:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat["special-attack"]}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {
+                              pokemonInformation1[pokemonIndex].stat[
+                                "special-attack"
+                              ]
+                            }
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="status special-defense">
+                    <div className="description">Special Defense:</div>
+                    <div className="status-bar">
+                      <div
+                        className="bar-value"
+                        style={{
+                          width: `${pokemonInformation1[pokemonIndex].stat["special-defense"]}%`,
+                        }}
+                      >
+                        <div className="bar-value2">
+                          <span className="text-value">
+                            {
+                              pokemonInformation1[pokemonIndex].stat[
+                                "special-defense"
+                              ]
+                            }
+                          </span>
+                        </div>
+                        <span className="dummy-block">2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="return-button">
+                <Link to="/">Home</Link>
+              </div>
+            </>
           )}
         </div>
-      )}
-
-      <div className="pokemon-container">
-        {loading ? (
-          <WrapLoading>
-            <img src={loadingIMG} />
-          </WrapLoading>
-        ) : errorCondition ? (
-          <ErrorWarning>
-            <h4>
-              An error has occured,&nbsp;
-              <span></span>
-              please try again.
-            </h4>
-          </ErrorWarning>
-        ) : (
-          <>
-            <div className="pokemon-info-section1">
-              <div className="wrap-image">
-                <div className="pokemon-info-title">
-                  <h3 className="pokemonID">
-                    No. {pokemonInformation1[pokemonIndex].id}
-                  </h3>
-                  <h1 className="name">
-                    {pokemonInformation1[pokemonIndex].name}
-                  </h1>
-                </div>
-                <div className="wrap-pokemon-image">
-                  <img
-                    src={pokemonFrontCircleBackground}
-                    className="pokemon-front-circle-background"
-                    alt=""
-                  />
-                  <img
-                    src={pokemonBackCircleBackground}
-                    className="pokemon-back-circle-background"
-                    alt=""
-                  />
-                  <img
-                    src={isImgLoading ? loadingIMG2 : pokemonImage}
-                    className="pokemon-image-info"
-                    alt=""
-                    onLoad={() => setIsImgLoading(false)}
-                    onError={(e) => (e.target.src = errorImg)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="pokemon-info-section2">
-              <div className="info height">
-                <span>Height</span>
-                <div className="wrap-height">
-                  <span className="cm">
-                    {pokemonInformation1[pokemonIndex].height.centimeter} cm
-                  </span>
-                  <span className="seperate">&nbsp;/&nbsp;</span>
-                  <span className="ft">
-                    {pokemonInformation1[pokemonIndex].height.feet} ft
-                  </span>
-                </div>
-              </div>
-              <div className="info weight">
-                <span>Weight</span>
-                <div className="wrap-weight">
-                  <span className="kg">
-                    {pokemonInformation1[pokemonIndex].weight.killogram} kg
-                  </span>
-                  <span className="seperate">&nbsp;/&nbsp;</span>
-                  <span className="lbs">
-                    {pokemonInformation1[pokemonIndex].weight.pound} lbs
-                  </span>
-                </div>
-              </div>
-              <div className="info capture-rate">
-                <span>Capture Rate</span>
-                <span>{pokemonInformation2[pokemonIndex].captureRate}</span>
-              </div>
-              <div className="info hatch-steps">
-                <span>Hatch Steps</span>
-                <span>{pokemonInformation2[pokemonIndex].hatchSteps}</span>
-              </div>
-              <div className="info abilities">
-                <span>Abilities</span>
-                <div className="wrap-abilities">
-                  <span>{pokemonInformation1[pokemonIndex].abilities}</span>
-                </div>
-              </div>
-            </div>
-            <div className="pokemon-info-section3">
-              <div className="types">
-                <h4 className="thicker">Types</h4>
-                <div className="wrap-types">
-                  {pokemonInformation1[pokemonIndex].type.map((type) => {
-                    const typeLowerCase = type.toLowerCase();
-                    return (
-                      <span
-                        className="types thicker"
-                        style={{
-                          backgroundColor: `${typesColor[typeLowerCase]}`,
-                        }}
-                      >
-                        {type}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="gender-ratio">
-                <h4>Gender Ratio</h4>
-                <div className="wrap-line">
-                  {/* Male */}
-                  {pokemonInformation2[pokemonIndex].genderRatio.originalRate >
-                    -1 &&
-                    pokemonInformation2[pokemonIndex].genderRatio.maleRate >
-                      0 && (
-                      <div
-                        className="gender male"
-                        style={{
-                          width: `${pokemonInformation2[pokemonIndex].genderRatio.maleRate}%`,
-                        }}
-                      >
-                        <div className="graph">
-                          <img src={maleGender} alt="male-gender" />
-                        </div>
-                      </div>
-                    )}
-
-                  {/* Female */}
-                  {pokemonInformation2[pokemonIndex].genderRatio.originalRate >
-                    -1 &&
-                    pokemonInformation2[pokemonIndex].genderRatio.femaleRate >
-                      0 && (
-                      <div
-                        className="gender female"
-                        style={{
-                          width: `${pokemonInformation2[pokemonIndex].genderRatio.femaleRate}%`,
-                        }}
-                      >
-                        <div className="graph">
-                          <img src={femaleGender} alt="female-gender" />
-                        </div>
-                      </div>
-                    )}
-
-                  {/* Unknown Gender */}
-                  {pokemonInformation2[pokemonIndex].genderRatio
-                    .originalRate === -1 && (
-                    <div
-                      className="gender unknown"
-                      style={{
-                        width: "100%",
-                      }}
-                    >
-                      <div className="graph">
-                        <img src={genderless} alt="genderless" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="ratio-percent">
-                  {pokemonInformation2[pokemonIndex].genderRatio.originalRate >=
-                  0 ? (
-                    <>
-                      {pokemonInformation2[pokemonIndex].genderRatio.maleRate >
-                        0 && (
-                        <span className="male thicker">
-                          Male:&nbsp;
-                          {
-                            pokemonInformation2[pokemonIndex].genderRatio
-                              .maleRate
-                          }
-                          %
-                        </span>
-                      )}
-
-                      {pokemonInformation2[pokemonIndex].genderRatio
-                        .femaleRate > 0 && (
-                        <span className="female thicker">
-                          Female:&nbsp;
-                          {
-                            pokemonInformation2[pokemonIndex].genderRatio
-                              .femaleRate
-                          }
-                          %
-                        </span>
-                      )}
-                    </>
-                  ) : (
-                    <span className="unknown thicker">
-                      None (Unknown Gender)
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="wrap-group-and-evs">
-                <div className="egg-group">
-                  <h4>
-                    {pokemonInformation2[pokemonIndex].eggGroups.length > 1
-                      ? "Egg Groups"
-                      : "Egg Group"}
-                  </h4>
-                  {pokemonInformation2[pokemonIndex].eggGroups.length > 0 ? (
-                    pokemonInformation2[pokemonIndex].eggGroups.map(
-                      (group, index) => {
-                        return <span key={index}>{group}</span>;
-                      }
-                    )
-                  ) : (
-                    <span>Undiscovered</span>
-                  )}
-                </div>
-                <div className="EVs">
-                  <h4>EVs</h4>
-                  <span>{pokemonInformation1[pokemonIndex].EVs}</span>
-                </div>
-              </div>
-            </div>
-            <div className="pokemon-info-section4">
-              <div className="info description">
-                <h4 className="thicker">Description</h4>
-                <p>
-                  {
-                    pokemonInformation2[pokemonIndex].description[
-                      pokemonInformation2[pokemonIndex].description.length - 1
-                    ].flavor_text
-                  }
-                </p>
-              </div>
-            </div>
-            <div className="pokemon-info-section5">
-              <h4>Status</h4>
-              <div className="wrap-status">
-                <div className="status hp">
-                  <div className="description">HP:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat.hp}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {pokemonInformation1[pokemonIndex].stat.hp}
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="status attack">
-                  <div className="description">Attack:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat.attack}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {pokemonInformation1[pokemonIndex].stat.attack}
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="status defense">
-                  <div className="description">Defense:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat.defense}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {pokemonInformation1[pokemonIndex].stat.defense}
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="status speed">
-                  <div className="description">Speed:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat.speed}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {pokemonInformation1[pokemonIndex].stat.speed}
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="status special-attack">
-                  <div className="description">Special Attack:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat["special-attack"]}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {
-                            pokemonInformation1[pokemonIndex].stat[
-                              "special-attack"
-                            ]
-                          }
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="status special-defense">
-                  <div className="description">Special Defense:</div>
-                  <div className="status-bar">
-                    <div
-                      className="bar-value"
-                      style={{
-                        width: `${pokemonInformation1[pokemonIndex].stat["special-defense"]}%`,
-                      }}
-                    >
-                      <div className="bar-value2">
-                        <span className="text-value">
-                          {
-                            pokemonInformation1[pokemonIndex].stat[
-                              "special-defense"
-                            ]
-                          }
-                        </span>
-                      </div>
-                      <span className="dummy-block">2</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="return-button">
-              <Link to="/">Home</Link>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="background-bottom"></div>
-    </PokemonInfoSection>
+        <div className="background-bottom"></div>
+      </PokemonInfoSection>
+    </WrapPokemonInfoSection>
   );
 };
 
@@ -536,7 +538,12 @@ const WrapLoading = styled.div`
     }
   }
 `;
-
+const WrapPokemonInfoSection = styled.div`
+  @media (max-width: 1200px) and (min-height: 650px), (max-width: 768px) {
+    height: 280vw;
+    overflow: hidden;
+  }
+`;
 const PokemonInfoSection = styled.section`
   position: relative;
   background-image: url(${pokemonBackground2});
