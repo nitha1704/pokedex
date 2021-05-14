@@ -1034,12 +1034,33 @@ const PokemonInfoSection = styled.section`
   /* Media Responsive */
   @media (max-width: 1333px) {
     min-height: 70vw;
-
+    .pokemon-info-section5 {
+      top: 54.8vw;
+    }
     .pokemon-info-section5 h4 {
-      top: -2.2vw !important;
+      top: -2.9vw !important;
     }
   }
-
+  @media (max-width: 1339px) and (min-height: 935px) {
+    .pokemon-info-section5 {
+      top: 54.8vw;
+    }
+  }
+  @media (max-width: 1339px) and (max-height: 925px) {
+    .pokemon-info-section5 {
+      top: 54.2vw;
+    }
+  }
+  @media (max-width: 1300px) {
+    .return-button {
+      top: 540%;
+    }
+  }
+  @media (max-width: 1000px) {
+    .pokemon-info-section5 h4 {
+      top: -3.1vw !important;
+    }
+  }
   @media (max-width: 900px) {
     top: -3vw;
     .pokemon-info-section1 .pokemon-info-title {
@@ -1047,6 +1068,11 @@ const PokemonInfoSection = styled.section`
     }
     .wrap-group-and-evs h4 {
       margin: 0 !important;
+    }
+  }
+  @media (max-width: 833px) {
+    .pokemon-info-section5 h4 {
+      top: -2.1vw !important;
     }
   }
   @media (max-width: 850px) {

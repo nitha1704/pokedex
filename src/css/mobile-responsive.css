@@ -1,6 +1,6 @@
-@media (max-width: 768px) {
+@media (max-width: 1200px) and (min-height: 650px), (max-width: 768px) {
   .app {
-    height: 276vw;
+    height: 280vw;
     overflow: hidden;
   }
 
@@ -14,11 +14,14 @@
     width: 100% !important;
   }
   .pokemon-info {
-    background: url("../images/pokemon_bg_mobile.jpg") !important;
+    background: url("../images/pokemon_bg_mobile.jpg") no-repeat !important;
     background-size: 100% auto !important;
     background-position: top;
-    min-height: 300vh !important;
+    min-height: 1000vh !important;
     top: -80vw !important;
+  }
+  .background-bottom {
+    display: block !important;
   }
   .gYBbqI .pokemon-info-section1 {
     position: relative !important;
@@ -140,6 +143,9 @@
   .pokemon-info-section3 .gender-ratio .ratio-percent span {
     font-size: 3.25vw !important;
   }
+  .pokemon-info-section3 .gender-ratio .wrap-line {
+    height: 5.5vw !important;
+  }
   .iJwVyo .pokemon-info-section3 .gender-ratio .wrap-line .gender img {
     height: 4vw !important;
     width: 4vw !important;
@@ -194,6 +200,7 @@
   }
   .pokemon-info-section5 .wrap-status .status .status-bar {
     width: 48vw !important;
+    height: 2.5vw !important;
   }
   .pokemon-info-section5
     .wrap-status
@@ -273,7 +280,7 @@
     }
     .loading-more-button {
       margin: 0 !important;
-      padding:30px 0 !important;
+      padding: 30px 0 !important;
     }
   }
 }
