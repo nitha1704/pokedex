@@ -260,6 +260,9 @@
 
 /* Safari 10.1+ */
 @media not all and (min-resolution: 0.001dpcm) {
+  .lazy-load-image-background.blur {
+    filter: blur(0) !important;
+  }
   .pokemon-info-section5 h4 {
     top: -2vw !important;
   }
@@ -269,7 +272,7 @@
       overflow: initial !important;
     }
     .loading-more-button {
-      margin:40px 0 !important;
+      padding:30px 0 !important;
     }
   }
 }
