@@ -1,5 +1,4 @@
 @media (max-width: 1200px) and (min-height: 650px), (max-width: 768px) {
-
   .pokemon-info .pokemon-container {
     top: 75vw;
     z-index: 1;
@@ -196,7 +195,7 @@
   }
   .pokemon-info-section5 .wrap-status .status .status-bar {
     width: 48vw !important;
-    height: 2.5vw !important;
+    height: 3vw !important;
   }
   .pokemon-info-section5
     .wrap-status
@@ -207,7 +206,7 @@
     font-size: 2.2vw !important;
   }
   .return-button {
-    top: 1960% !important;
+    top: 270vw !important;
   }
 
   /* Animation */
@@ -223,11 +222,8 @@
 }
 
 @media (max-width: 450px) {
-  .app {
-    height: 310vw !important;
-  }
-  .background-bottom {
-    top: 260vw !important;
+  .wrap-pokemon-info-section {
+    height: 290vw !important;
   }
   .pokemon-info-section1 .wrap-image .wrap-pokemon-image {
     top: 3vw !important;
@@ -250,9 +246,12 @@
   .pokemon-info-section5 {
     top: 220.8vw !important;
   }
-  .return-button {
-    top: 2145% !important;
+  .background-bottom {
+    top: 240vw !important;
   }
+  .return-button {
+    top: 278vw !important;
+}
 }
 
 @media (max-width: 768px) and (max-height: 550px) {

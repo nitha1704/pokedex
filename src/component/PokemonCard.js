@@ -235,7 +235,7 @@ const PokeCard = styled.div`
   .lazy-load-image-background.blur {
     width: 12vw;
     height: 12vw;
-    filter: blur(0.1px) !important;
+    filter: blur(0.1px);
   }
 
   @media (max-width: 992px) {
