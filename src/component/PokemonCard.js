@@ -104,7 +104,7 @@ const PokemonCard = ({ pokemonFilter }) => {
           const errorIMG = `./public_images/pokemon-notfound/poke${id}.png`;
 
           return (
-            <PokeCard key={id} id={id}>
+            <PokeCard key={id} id={id} className="pokemon-card">
               <Link
                 to={`/pokemon/${id}`}
                 onClick={() => setScrollTopPosition(window.pageYOffset)}
