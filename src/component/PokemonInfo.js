@@ -756,20 +756,22 @@ const PokemonInfoSection = styled.section`
       .ft {
         position: relative;
         left: 13px;
+        padding-left: 0.5vw;
         &:before {
           content: "-";
           position: absolute;
-          left: -12px;
+          left: -13px;
         }
       }
       .kg,
       .lbs {
         position: relative;
         left: 13px;
+        padding-left: 0.5vw;
         &:before {
           content: "-";
           position: absolute;
-          left: -12px;
+          left: -13px;
         }
       }
     }
@@ -1056,6 +1058,11 @@ const PokemonInfoSection = styled.section`
   @media (max-width: 1339px) and (max-height: 925px) {
     .pokemon-info-section5 {
       top: 54.2vw;
+    }
+  }
+  @media (max-width: 1356px) and (min-width: 1340px) {
+    .pokemon-info-section5 {
+      top: 54.8vw;
     }
   }
   @media (max-width: 1300px) {

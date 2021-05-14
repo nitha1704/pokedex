@@ -6,7 +6,7 @@ import {PokedexContext} from '../context/PokedexContext';
 // Component
 import PokemonCard from './PokemonCard';
 // Loading Image
-import loadingIMG from "../images/loading-img/loading250x250-2.gif";
+import loadingIMG from "../images/loading-img/loading2.gif";
 
 const PokemonList = () => {
 
