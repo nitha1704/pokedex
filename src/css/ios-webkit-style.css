@@ -20,7 +20,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-height: 850px) {
     .pokemon-info-section5 {
       top: 54.8vw !important;
     }
