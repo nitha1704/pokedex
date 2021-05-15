@@ -539,10 +539,11 @@ const WrapLoading = styled.div`
   }
 `;
 const WrapPokemonInfoSection = styled.div`
-  @media (max-width: 1200px) and (min-height: 650px), (max-width: 768px) {
-    height: 280vw;
-    overflow: hidden;
-  }
+  max-height: 290vw;
+  /* overflow: hidden; */
+  /* @media (min-width: 768px) and (max-height: 850px) {
+    overflow: unset;
+  } */
 `;
 const PokemonInfoSection = styled.section`
   position: relative;
@@ -1056,6 +1057,7 @@ const PokemonInfoSection = styled.section`
   @media (max-width: 1300px) {
     .return-button {
       top: 540%;
+      padding: 0 0 50px 0;
     }
   }
   @media (max-width: 1000px) {

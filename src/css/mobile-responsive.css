@@ -1,4 +1,7 @@
 @media (max-width: 1200px) and (min-height: 850px), (max-width: 768px) {
+  .wrap-pokemon-info-section{
+    overflow:hidden;
+  }
   .pokemon-info .pokemon-container {
     top: 75vw;
     z-index: 1;
@@ -251,7 +254,7 @@
   }
   .return-button {
     top: 278vw !important;
-}
+  }
 }
 
 @media (max-width: 768px) and (max-height: 550px) {
@@ -259,5 +262,3 @@
     min-height: 500vh !important;
   }
 }
-
-
