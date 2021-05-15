@@ -21,9 +21,9 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route
+            // Limit Pokemon Number 1-898
             exact
             path="/pokemon/:id([1-9]|[1-9][0-9]|[1-7][0-9]{2}|8[0-8][0-9]|89[0-8])"
-            // Limit Pokemon Number 1-898
             component={PokemonInfo}
           />
           <Route exact path="*" component={ErrorPage} />
