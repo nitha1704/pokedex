@@ -3,6 +3,9 @@
   .wrap-pokemon-info-section {
     overflow-x: hidden;
   }
+  .pokemon-info-section5 {
+    top: 54.8vw !important;
+  }
   .pokemon-card .lazy-load-image-background.blur {
     filter: blur(0px) !important;
   }

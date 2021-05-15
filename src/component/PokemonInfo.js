@@ -540,7 +540,6 @@ const WrapLoading = styled.div`
 `;
 const WrapPokemonInfoSection = styled.div`
   max-height: 290vw;
-  overflow-x: hidden;
 `;
 const PokemonInfoSection = styled.section`
   position: relative;
