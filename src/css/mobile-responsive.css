@@ -270,7 +270,6 @@
   }
   @media (max-width: 992px) {
     .app {
-      min-height: 467vw !important;
       overflow: initial !important;
     }
     .loading-more-button {
