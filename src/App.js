@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // CSS
 import "./css/style.css";
 import "./css/mobile-responsive.css";
+import "./css/ios-webkit-style.css";
 
 // Plugins
 import "./plugins/bootstrap/bootstrap.min.css";
