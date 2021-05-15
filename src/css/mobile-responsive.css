@@ -1,4 +1,4 @@
-@media (max-width: 1200px) and (min-height: 650px), (max-width: 768px) {
+@media (max-width: 1200px) and (min-height: 850px), (max-width: 768px) {
   .pokemon-info .pokemon-container {
     top: 75vw;
     z-index: 1;
