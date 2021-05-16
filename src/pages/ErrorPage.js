@@ -57,6 +57,7 @@ const WrapError = styled.section`
     }
     .pokeball {
       width: 15rem;
+      height: 15rem;
     }
   }
   .container-error-item2 {
@@ -96,6 +97,7 @@ const WrapError = styled.section`
       }
       .pokeball {
         width: 30vw;
+        height: 30rem;
       }
     }
     .container-error-item2 {
