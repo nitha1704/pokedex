@@ -1043,7 +1043,7 @@ const PokemonInfoSection = styled.section`
   @media (max-width: 1333px) {
     min-height: 70vw;
     .pokemon-info-section5 h4 {
-      top: -2.9vw !important;
+      top: -3vw;
     }
   }
   @media (max-width: 1339px) and (min-height: 935px) {
