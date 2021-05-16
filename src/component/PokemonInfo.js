@@ -1058,9 +1058,14 @@ const PokemonInfoSection = styled.section`
       padding: 0 0 50px 0;
     }
   }
+  @media (max-width: 1238px) {
+    .pokemon-info-section5 h4 {
+      top: -2.3vw;
+    }
+  }
   @media (max-width: 1000px) {
     .pokemon-info-section5 h4 {
-      top: -3.1vw !important;
+      top: -3.1vw;
     }
   }
   @media (max-width: 900px) {
