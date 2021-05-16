@@ -581,6 +581,7 @@ const PokemonInfoSection = styled.section`
       }
       .nav-left {
         width: 30vw;
+        height: auto;
       }
       .arrow-left {
         position: absolute;
