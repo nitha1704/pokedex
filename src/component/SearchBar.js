@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import styled from "styled-components";
 
 // Context
@@ -9,15 +8,11 @@ import searchIMG from "../images/icon_magnifying_glass.png";
 
 const SearchBar = () => {
   const {
-    loading,
-    setLoading,
     pokemon,
-    setPokemon,
     pokemonSearchData,
     setPokemonFilter,
     pokemonName,
     setPokemonName,
-    pokemonEndPoint,
     setPokemonEndPoint,
   } = useContext(PokedexContext);
 
@@ -71,7 +66,7 @@ const SearchBar = () => {
         onKeyDown={(event) => event.key === "Enter" && handleSubmitSearch()}
       />
       <div className="wrap-search-image" onClick={() => handleSubmitSearch()}>
-        <img src={searchIMG} alt="search-image" />
+        <img src={searchIMG} alt="search-icon" />
       </div>
 
       {pokemonName && showSearchBar && (
@@ -81,7 +76,6 @@ const SearchBar = () => {
               value.name.toLowerCase().includes(pokemonName.toLowerCase())
             )
             .map((value) => {
-              console.log(value);
               const firstCharUpperCase = value.name.split(" ").map((char) => {
                 return char.charAt(0).toUpperCase() + char.substring(1);
               });
@@ -94,7 +88,10 @@ const SearchBar = () => {
                   }}
                 >
                   <div className="pokemon-thumbnail">
-                    <img src={value.sprites.front_default} />
+                    <img
+                      src={value.sprites.front_default}
+                      alt={firstCharUpperCase}
+                    />
                   </div>
                   <div className="pokemon-name">
                     <h3>{firstCharUpperCase}</h3>

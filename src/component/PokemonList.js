@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useContext} from "react";
 import styled from 'styled-components';
 
 // Context
@@ -14,7 +14,7 @@ const PokemonList = () => {
 
   if(loading) {
       return <WrapLoadingImage>
-          <img src={loadingIMG} />
+          <img src={loadingIMG} alt="loading-img" />
       </WrapLoadingImage>;
   }
   return (

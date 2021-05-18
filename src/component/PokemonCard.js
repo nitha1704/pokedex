@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Link as AnchorLink, animateScroll as scroll } from "react-scroll";
+import {animateScroll as scroll } from "react-scroll";
 import { PokedexContext } from "../context/PokedexContext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "../../node_modules/react-lazy-load-image-component/src/effects/blur.css";
@@ -55,11 +55,11 @@ const PokemonCard = ({ pokemonFilter }) => {
         setPokemonChildrenLength(wrapPokemonItem.current.children.length);
       }
     }
-  });
+  }, [pokemonFilter.length]);
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, scrollTopPosition);
-  },[])
+  }, [scrollTopPosition]);
 
   if(!pokemonFilter || !Array.isArray(pokemonFilter)) {
         return (
@@ -92,7 +92,7 @@ const PokemonCard = ({ pokemonFilter }) => {
               ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${id}.png`
               : id < 100
               ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png`
-              : `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`
+              : `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
 
           const firstCharUpperCaseName = name
             .split(" ")
@@ -136,6 +136,7 @@ const PokemonCard = ({ pokemonFilter }) => {
                       <span
                         className="types thicker"
                         style={{ backgroundColor: typesColor[type.name] }}
+                        key={index}
                       >
                         {typesCapitalizeChar}
                       </span>
@@ -150,16 +151,16 @@ const PokemonCard = ({ pokemonFilter }) => {
 
       <LoadingMore className="loading-more-button">
         <div className="wrap-button">
-          {handleFirstRender.current == false &&
+          {handleFirstRender.current === false &&
           pokemonChildrenLength >= pokemonFilter.length ? (
-            <a className="no-more-item">No More Item</a>
+            <button className="no-more-item">No More Item</button>
           ) : (
-            <AnchorLink
+            <button
               className="loading-more"
               onClick={() => handleLoadingMore()}
             >
               Loading More...
-            </AnchorLink>
+            </button>
           )}
         </div>
       </LoadingMore>
@@ -319,7 +320,7 @@ const NotFoundPokemon = styled.div`
 
 const LoadingMore = styled.div`
   margin: 30px 0;
-  a.no-more-item {
+  button.no-more-item {
     color: #fff;
     font-size: 22px;
     letter-spacing: 1px;
@@ -330,7 +331,7 @@ const LoadingMore = styled.div`
     outline: none;
     cursor: no-drop;
   }
-  a.loading-more {
+  button.loading-more {
     color: #fff;
     font-size: 22px;
     letter-spacing: 1px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
@@ -17,7 +17,6 @@ import genderless from "../images/oie_transparent.png";
 // Loading Image
 import loadingIMG from "../images/loading-img/loading250x250-2.gif";
 import loadingIMG2 from "../images/loading-img/pokemon-loading6.gif";
-import loadingIMG3 from "../images/loading-img/loading3.gif";
 
 // Navigator Images
 import navLeft from "../images/arrow_pc_left.png";
@@ -58,12 +57,11 @@ const PokemonInfo = () => {
     pokemonInformation1.length <= 0 ||
     pokemonInformation2.length <= 0;
 
-  // Scroll
-  let scrollTop = window.pageYOffset;
-  let scrollBottom = scrollTop + window.innerHeight;
-  const handleFirstRef = useRef(true);
-
   const deleteAnimationBar = () => {
+    // Scroll
+    let scrollTop = window.pageYOffset;
+    let scrollBottom = scrollTop + window.innerHeight;
+
     const elem = document.querySelector(".wrap-status");
     const elemTop = elem.getBoundingClientRect().top;
     if (scrollBottom < elemTop) {
@@ -74,11 +72,14 @@ const PokemonInfo = () => {
   };
 
   useEffect(() => {
+    // Scroll
+    let scrollTop = window.pageYOffset;
+    let scrollBottom = scrollTop + window.innerHeight;
+
     if (!loading && errorCondition === false) {
       // Elem
       const elem = document.querySelector(".wrap-status");
       const elemTop = elem.getBoundingClientRect().top;
-      const elemBottom = elemTop + window.innerHeight;
       document.addEventListener("scroll", function () {
         scrollTop = window.pageYOffset;
         scrollBottom = scrollTop + window.innerHeight;
@@ -106,7 +107,7 @@ const PokemonInfo = () => {
           <div className="pokemon-info-navigator">
             {prevPokemon && (
               <div className="pokemon-info-navigator-left">
-                <img src={navLeft} alt="nav-left" class="nav-left" />
+                <img src={navLeft} alt="nav-left" className="nav-left" />
                 <div className="prev-pokemon">
                   <div className="id">No.{prevPokemon.id}</div>
                   <div className="name">{prevPokemon.name}</div>
@@ -119,11 +120,11 @@ const PokemonInfo = () => {
                     deleteAnimationBar();
                   }}
                 >
-                  <img src={arrowLeft} alt="arrow-left" class="arrow-left" />
+                  <img src={arrowLeft} alt="arrow-left" className="arrow-left" />
                   <img
                     src={arrowLeftActive}
                     alt="arrow-left-active"
-                    class="arrow-left-active"
+                    className="arrow-left-active"
                   />
                 </Link>
               </div>
@@ -131,7 +132,7 @@ const PokemonInfo = () => {
 
             {nextPokemon && (
               <div className="pokemon-info-navigator-right">
-                <img src={navRight} alt="nav-right" class="nav-right" />
+                <img src={navRight} alt="nav-right" className="nav-right" />
                 <div className="next-pokemon">
                   <div className="id">No.{nextPokemon.id}</div>
                   <div className="name">{nextPokemon.name}</div>
@@ -144,11 +145,11 @@ const PokemonInfo = () => {
                     deleteAnimationBar();
                   }}
                 >
-                  <img src={arrowRight} alt="arrow-right" class="arrow-right" />
+                  <img src={arrowRight} alt="arrow-right" className="arrow-right" />
                   <img
                     src={arrowRightActive}
                     alt="arrow-right-active"
-                    class="arrow-right-active"
+                    className="arrow-right-active"
                   />
                 </Link>
               </div>
@@ -159,7 +160,7 @@ const PokemonInfo = () => {
         <div className="pokemon-container">
           {loading ? (
             <WrapLoading>
-              <img src={loadingIMG} />
+              <img src={loadingIMG} alt="loading-img" />
             </WrapLoading>
           ) : errorCondition ? (
             <ErrorWarning>
@@ -254,6 +255,7 @@ const PokemonInfo = () => {
                           style={{
                             backgroundColor: `${typesColor[typeLowerCase]}`,
                           }}
+                          key={typeLowerCase}
                         >
                           {type}
                         </span>
@@ -358,7 +360,7 @@ const PokemonInfo = () => {
                     {pokemonInformation2[pokemonIndex].eggGroups.length > 0 ? (
                       pokemonInformation2[pokemonIndex].eggGroups.map(
                         (group, index) => {
-                          return <span key={index}>{group}</span>;
+                          return <span key={group}>{group}</span>;
                         }
                       )
                     ) : (

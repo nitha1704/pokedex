@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useCallback } from "react";
 import axios from "axios";
 
 const PokedexContext = createContext();
@@ -42,13 +42,13 @@ const GlobalContext = ({ children }) => {
     fairy: "#fe9fc1",
   };
 
-  const pokemonIndexNumber = [];
-  for (let i = 1; i <= 251; i++) {
-    pokemonIndexNumber.push(i);
-  }
-
-  const getData = async () => {
+  const getData = useCallback(async () => {
     setLoading(true);
+
+    const pokemonIndexNumber = [];
+    for (let i = 1; i <= 251; i++) {
+      pokemonIndexNumber.push(i);
+    }
 
     const q1 = await Promise.all(
       pokemonIndexNumber.map((item) => {
@@ -133,6 +133,7 @@ const GlobalContext = ({ children }) => {
               if (flavor.language.name === "en") {
                 return flavor.flavor_text;
               }
+              return null;
             }),
           };
         })
@@ -150,16 +151,15 @@ const GlobalContext = ({ children }) => {
       setPokemonFilter(undefined);
     }
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <PokedexContext.Provider
       value={{
-        getData,
         loading,
         setLoading,
         pokemon,
