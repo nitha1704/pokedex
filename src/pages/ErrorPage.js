@@ -14,7 +14,7 @@ const ErrorPage = () => {
           <div className="container-error-item1">
             <span className="number">4</span>
             <span>
-              <img src={pokeball} class="pokeball" alt="pokeball" />
+              <img src={pokeball} className="pokeball" alt="pokeball" />
             </span>
             <span className="number">4</span>
           </div>
