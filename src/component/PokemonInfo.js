@@ -542,8 +542,10 @@ const WrapLoading = styled.div`
 `;
 const WrapPokemonInfoSection = styled.div`
   max-height: 290vw;
-  @media (orientation: landscape) {
-    height:300vw;
+  @media (min-resolution: 192dpi) {
+    @media (orientation: landscape) {
+      height: 300vw;
+    }
   }
 `;
 const PokemonInfoSection = styled.section`
