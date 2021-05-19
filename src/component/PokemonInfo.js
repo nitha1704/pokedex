@@ -542,6 +542,7 @@ const WrapLoading = styled.div`
 `;
 const WrapPokemonInfoSection = styled.div`
   max-height: 290vw;
+  /* Android Only */
   @media (min-resolution: 192dpi) {
     @media (orientation: landscape) {
       height: 300vw;
