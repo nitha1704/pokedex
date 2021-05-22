@@ -12,7 +12,7 @@ import pokemonFrontCircleBackground from "../images/pokemon_front_circle_bg.png"
 import pokemonBackCircleBackground from "../images/pokemon_back_circle_bg.png";
 import maleGender from "../images/icon_male.png";
 import femaleGender from "../images/icon_female.png";
-import genderless from "../images/oie_transparent.png";
+import genderless from "../images/genderless-gray.png";
 
 // Loading Image
 import loadingIMG from "../images/loading-img/loading250x250-2.gif";
