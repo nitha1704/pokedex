@@ -46,7 +46,7 @@ const GlobalContext = ({ children }) => {
     setLoading(true);
 
     const pokemonIndexNumber = [];
-    for (let i = 1; i <= 251; i++) {
+    for (let i = 1; i <= 898; i++) {
       pokemonIndexNumber.push(i);
     }
 
